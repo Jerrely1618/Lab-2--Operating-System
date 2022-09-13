@@ -22,11 +22,11 @@ int main (int argc, char* argv[])
             printf ("%s is not accessible\n", filepath);
         }
     }
-    returnval = access (filepath, R_OK);
+    returnval = access(filepath, R_OK);
     if(returnval != 0){
             printf ("%s cannot be read\n", filepath);
     }
-    returnval = access (filepath, W_OK);
+    returnval = access(filepath, W_OK);
     if(errno != 0){
         printf ("%s cannot write\n", filepath);
     }
