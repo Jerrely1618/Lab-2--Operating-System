@@ -8,7 +8,7 @@
 int main(int argc, char* argv[]){
     char* SourceFile = argv[1];
     char* DestinationFile = argv[2];
-    int sf,df,off,ret,writ;
+    int sf,df,ret,writ;
     
     sf = open(SourceFile,O_RDONLY);
     df = open(DestinationFile,O_WRONLY);
@@ -17,15 +17,21 @@ int main(int argc, char* argv[]){
         perror("Error");
     }
     else{
-        char c;
-        ret = read(sf, &c, 1);
+        ret = 1;
         while(ret != 0){
-            char * buf;
-            writ = write(df,&c,1);
-            ret = read(sf, &c, 1);
+            char* buf;
+            for(int i = 0; i < 100;i++){
+                char c;
+                ret = read(sf, &c, 1);
+                if (ret == 0){break;}
+                if(c == '1'){
+                    c = 'L';
+                }
+                writ = write(df,&c,1);
+            }
+            buf = "XYZ";
+            writ = write(df,buf,3);
         }
-        char* buf = "XYZ";
-        writ = write(df,buf,3);
 
         close(sf);
         close(df);
