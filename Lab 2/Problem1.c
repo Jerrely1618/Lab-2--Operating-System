@@ -22,10 +22,13 @@ int main (int argc, char* argv[])
             printf ("%s is not accessible\n", filepath);
         }
     }
+    //We try to access the file with read permission
     returnval = access(filepath, R_OK);
     if(returnval != 0){
             printf ("%s cannot be read\n", filepath);
     }
+    
+    //We try to access the file with write permission
     returnval = access(filepath, W_OK);
     if(errno != 0){
         printf ("%s cannot write\n", filepath);

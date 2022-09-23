@@ -6,22 +6,34 @@
 #include <string.h>
 #include <errno.h>
 int main(int argc, char* argv[]){
+    if(argc !=2){
+        printf("File parameter is missing\n");
+        return 1;
+    }
     char* filepath = argv[1];
     int fd,ret;
+
+    //Opens the input file with Read only permissions
     fd = open(filepath,O_RDONLY);
+    
     if(fd == -1){
         perror("Error");
     }
     else{
+        //Start reading the document with the first char using read()
+        //The open document and a char variable is passed
         char c;
         ret = read(fd, &c, 1);
+
+        //The loop repeats until read() returns 0
+        //0 means that no char was read
         while(ret != 0){
             printf("%c",c);
             ret = read(fd, &c, 1);
         }
+
+        //close the file
         close(fd);
     }
-        
-//https://www.ibm.com/docs/en/i/7.2?topic=ssw_ibm_i_72/apis/write.htm
     return 0;
 }

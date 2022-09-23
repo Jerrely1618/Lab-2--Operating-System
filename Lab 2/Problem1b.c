@@ -11,9 +11,9 @@ int main(int argc, char* argv[]){
         printf("File parameter is missing\n");
         return 1;
     }
-    errno = 0;
-    creat("destination.txt",S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-    fd = open("destination.txt",O_RDWR);
+
+    //Open the document if it exist else create it
+    fd = open(argv[1],O_CREAT|O_RDWR,S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if(fd == -1){
         printf("\n open () failed with error [%s]\n", strerror(errno));
         return 1;
@@ -21,6 +21,7 @@ int main(int argc, char* argv[]){
     else {
         printf("\n Open() successful\n");
     }
+    //Close the file
     close(fd);
     return 0;
 }
