@@ -9,31 +9,32 @@ int main(int argc, char* argv[]){
     }
 
     int seriesNum = atoi(argv[1]);
-    int totalEven = 0, totalOdd = 0, total = 0;
+    int total = 0;
 
     int Qchild = fork();
     if(Qchild == 0){
         for(int i = 0; i <= seriesNum; i+=2){
-            totalEven += i;
+            total += i;
         }
-        printf("Total(Even Child): %d\n",totalEven);
-        exit(totalEven);
+        printf("Total(Even Child): %d\n",total);
     }
     else if (Qchild > 0){
         int stat;
         waitpid(Qchild,&stat,0);
         int Rchild = fork();
+
         if (Rchild == 0){
             for(int i = 1; i <= seriesNum; i+=2){
-                totalOdd += i;
+                total += i;
             }
-            printf("Total(Odd Child): %d\n",totalOdd);
-            exit(totalOdd);
+            printf("Total(Odd Child): %d\n",total);
         }
         else if (Rchild > 0){
             waitpid(Rchild,&stat,0);
-            total = totalEven + totalOdd;
-            printf("Total(Parent): %d,%d,%d\n",totalEven,totalOdd,total);
+            for(int i = 0; i <= seriesNum; i++){
+                total += i;
+            }
+            printf("Total(Parent): %d\n",total);
         }
     }
     return 0;
