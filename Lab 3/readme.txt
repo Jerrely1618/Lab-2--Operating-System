@@ -1,1 +1,2 @@
-hello read me now
+lol
+Parent is writing: lol
