@@ -5,12 +5,10 @@
 #include <fcntl.h>
 
 int main(int argc, char* argv[]){
-    if (argc != 4){return 0;}
     char* SourceFile = "source.txt";
-    char* DestinationFile = "destination.txt";
+    char* DestinationFile = "destination1.txt";
     char* DestinationFile2 = "destination2.txt";
     int sf,df,df2,ret,writ;
-
     //Open the source file to read and the destination file to write
     sf = open(SourceFile,O_RDONLY);
     df = open(DestinationFile,O_WRONLY);

@@ -7,24 +7,22 @@ int main(int argc, char* argv[]){
     int fr = fork();
     
     if (fr == 0){
-        printf("My Id is: %d\n",getpid());
-        execvp("result.exe",&argv[0]);
+        execv("Prcs1.exe",("\n",NULL));
     }
-    // else if (fr > 0){
-    //     int dp = fork();
-    //     if(dp == 0){
-
-    //     }
-    //     else if(dp > 0){
-
-    //     }
-    //     else{
-    //         perror("Error");
-    //     }
-    // }
-    // else{
-    //     perror("Error");
-    // }
+    else if (fr > 0){
+        int stat;
+        waitpid(fr,&stat,0);
+        int dp = fork();
+        if(dp == 0){
+            execv("Prcs2.exe",("\n",NULL));
+        }
+        else if(dp < 0){
+            perror("Error");
+        }
+    }
+    else{
+        perror("Error");
+    }
 
     return 0;
 }

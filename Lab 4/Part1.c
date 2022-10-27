@@ -7,7 +7,7 @@ int main(){
     
     if (fr == 0){
         printf("My Id is: %d\n",getpid());
-        execl("/usr/bin/date","null","\n",NULL);
+        execl("/usr/bin/date","\n",NULL);
     }
 
     return 0;
